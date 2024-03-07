@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.test_mku_app.Models.ChoiceModel;
 import com.example.test_mku_app.Models.ModuleModel;
@@ -101,14 +102,34 @@ public class AddQuestionFragment extends Fragment {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addQuestion();
-                clearData();
-                refreshFragment();
+                if (isFieldsValid() == true) {
+                    addQuestion();
+                    clearData();
+                    refreshFragment();
+                }else
+                    Toast.makeText(getActivity(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
     }
+    private boolean isFieldsValid() {
+        String content = editContent.getText().toString().trim();
+        String answerA = editAnswerA.getText().toString().trim();
+        String answerB = editAnswerB.getText().toString().trim();
+        String answerC = editAnswerC.getText().toString().trim();
+        String answerD = editAnswerD.getText().toString().trim();
+
+        if (content.isEmpty() || answerA.isEmpty() || answerB.isEmpty() || answerC.isEmpty() || answerD.isEmpty()) {
+            return false;
+        }
+        if (!radioA.isChecked() && !radioB.isChecked() && !radioC.isChecked() && !radioD.isChecked()) {
+            return false;
+        }
+
+        return true;
+    }
+
     private void clearData() {
         List<EditText> editTextList = new ArrayList<>();
         editTextList.add(editContent); // Thêm tất cả các EditText của bạn vào danh sách
