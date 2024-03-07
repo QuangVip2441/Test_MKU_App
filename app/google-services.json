@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "225884127980",
+    "project_id": "test-mku-app",
+    "storage_bucket": "test-mku-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225884127980:android:3cd9baca6a249077ac5bc9",
+        "android_client_info": {
+          "package_name": "com.example.test_mku_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx-qSxRqppAXNr1v8Fqs6kT9m-RXqUgvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

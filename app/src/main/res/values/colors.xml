@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1F5BF3</color>
+    <color name="colorPrimaryDark">#0947E8</color>
+    <color name="colorAccent">#00A5FF</color>
+
+    <!--colors for modern UI-->
+    <color name="whiteTextColor">#FFF</color>
+    <color name="primaryTextColor">#2661FA</color>
+    <color name="loginBkColor">#F0F0F0</color>
+
+    <!--colors for card-->
+    <color name="whiteCardColor">#FFF</color>
+    <color name="orange">#FF7043</color>
+    <color name="black">#0B0A0A</color>
+
+    <color name="colorMagenta">#9023D9</color>
+    <color name="colorPink">#E479F2</color>
+    <color name="colorBlue">#3314A6</color>
+    <color name="colorGreen">#C4F21B</color>
+    <color name="colorGray">#F2F1F7</color>
+    <color name="colorYellow">#EBF21B</color>
+    <color name="colorRed">#F20519</color>
+    <color name="colorOrange">#F2913D</color>
+</resources>
