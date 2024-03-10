@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choice module"/>
+            android:text="Chọn Module"/>
 
         <Spinner
             android:id="@+id/spinnerModule"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textLongMessage"
                 android:lines="5"
-                android:hint="Question"
+                android:hint="Câu hỏi"
                 android:textStyle="bold"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -52,7 +52,7 @@
                 android:id="@+id/editAnswerA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Answer A"/>
+                android:hint="Đáp án A"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +63,7 @@
                 android:id="@+id/editAnswerB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Answer B"/>
+                android:hint="Đáp án B"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +74,7 @@
                 android:id="@+id/editAnswerC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Answer C"/>
+                android:hint="Đáp án C"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,14 +85,14 @@
                 android:id="@+id/editAnswerD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Answer D"/>
+                android:hint="Đáp án D"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choice answer"/>
+            android:text="Đáp án đúng"/>
 
         <RadioGroup
             android:layout_width="match_parent"

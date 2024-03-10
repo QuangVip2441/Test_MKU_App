@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Login"/>
+            android:text="Đăng Nhập"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtEmail"
@@ -58,21 +58,29 @@
             android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:width="200dp"
+            android:height="54dp"
+            android:angle="45"
+            android:centerX="35%"
+            android:startColor="#FC8822"
+            android:endColor="#FFB129"
+            android:type="linear"
             android:layout_marginTop="20dp"
-            android:background="@drawable/login_button_bk"
+            android:radius="27dp"
             android:textColor="@color/whiteTextColor"
             android:textStyle="bold"
-            android:text="Login"
+            android:text="Đăng nhập"
             />
 
         <TextView
             android:id="@+id/tvforgetpassword"
             style="@style/parent"
             android:layout_marginTop="20dp"
-            android:text="@string/login_forgot_pass"
+            android:text="Quên mật khẩu?"
             android:textAlignment="textEnd"
             android:textColor="@color/primaryTextColor"
             android:textStyle="bold"
+            android:layout_marginRight="40dp"
             android:gravity="end"/>
     </LinearLayout>
 
