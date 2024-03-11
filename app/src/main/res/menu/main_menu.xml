@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="Trang chủ"
+            android:icon="@drawable/ic_home"/>
+
+        <item
+            android:id="@+id/nav_document"
+            android:title="Tài liệu"
+            android:icon="@drawable/ic_module_first"/>
+
+        <item
+            android:id="@+id/nav_chart"
+            android:title="Biểu đồ rèn luyện"
+            android:icon="@drawable/baseline_bar_chart_24"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+
+        <item android:title="Cá nhân">
+            <menu>
+                <item
+                    android:id="@+id/nav_profile"
+                    android:title="Trang cá nhân"
+                    android:icon="@drawable/baseline_person_outline_24"/>
+
+                <item
+                    android:id="@+id/nav_logout"
+                    android:title="Đăng xuất"
+                    android:icon="@drawable/ic_logout"/>
+            </menu>
+        </item>
+    </group>
+
+    <item android:title="Khác">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:title="Chia sẻ"
+                android:icon="@drawable/baseline_share_24"/>
+            <item
+                android:id="@+id/nav_rate"
+                android:title="Đánh giá"
+                android:icon="@drawable/ic_rate_review"/>
+        </menu>
+    </item>
+
+</menu>
