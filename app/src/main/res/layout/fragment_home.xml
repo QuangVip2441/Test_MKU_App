@@ -7,6 +7,7 @@
     tools:context=".Views.HomeFragment"
     android:id="@+id/fragment_container"
     android:fitsSystemWindows="true"
+
     >
 
     <com.google.android.material.navigation.NavigationView

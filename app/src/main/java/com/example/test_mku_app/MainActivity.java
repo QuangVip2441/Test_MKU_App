@@ -9,6 +9,7 @@ import com.example.test_mku_app.Models.ChoiceModel;
 import com.example.test_mku_app.Models.QuestionModel;
 import com.example.test_mku_app.Views.AddModuleFragment;
 import com.example.test_mku_app.Views.AddQuestionFragment;
+import com.example.test_mku_app.Views.HomeFragment;
 import com.example.test_mku_app.ultils.FragmentUtils;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         mQuestions = new ArrayList<>();
         //mQuestions = getMCQ();
 
-        replaceFragment(new AddQuestionFragment());
+        replaceFragment(new HomeFragment());
     }
 
     private void replaceFragment(Fragment fragment) {

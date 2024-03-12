@@ -2,14 +2,23 @@ package com.example.test_mku_app.Views;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.test_mku_app.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +26,10 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private MaterialButton buttonQuizModule;
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +41,35 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+//        Hooks
+        drawerLayout = view.findViewById(R.id.fragment_container);
+        navigationView = view.findViewById(R.id.nav_view);
+        toolbar = view.findViewById(R.id.toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity != null) {
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawerLayout.addDrawerListener(toggle);
+            toggle.syncState();
+
+            view.setFocusableInTouchMode(true);
+            view.requestFocus();
+            view.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                        // Gọi onBackPressed của Activity
+                        activity.onBackPressed();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }
+
+
+
+
 
 //        ArrayList<ModuleModel> models = new ArrayList<>();
 //        models.add(new ModuleModel("dp7OLmrhP43fOxYfD7m0","IU01","Hiểu biết về CNTT cơ bản",50));
@@ -71,4 +113,5 @@ public class HomeFragment extends Fragment {
 //        }
         return view;
     }
+
 }
