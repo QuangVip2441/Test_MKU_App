@@ -17,10 +17,11 @@
             android:icon="@drawable/baseline_bar_chart_24"/>
     </group>
 
-    <group android:checkableBehavior="single">
 
-        <item android:title="Cá nhân">
-            <menu>
+
+    <item android:title="Cá nhân">
+        <menu>
+            <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_profile"
                     android:title="Trang cá nhân"
@@ -30,9 +31,9 @@
                     android:id="@+id/nav_logout"
                     android:title="Đăng xuất"
                     android:icon="@drawable/ic_logout"/>
-            </menu>
-        </item>
-    </group>
+            </group>
+        </menu>
+    </item>
 
     <item android:title="Khác">
         <menu>

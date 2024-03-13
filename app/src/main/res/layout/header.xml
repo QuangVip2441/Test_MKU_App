@@ -25,6 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:fontFamily="@font/aclonica"
-        android:text="MKU.edu.vn"
+        android:text="WWW.mku.edu.vn"
         android:textSize="14sp" />
 </LinearLayout>

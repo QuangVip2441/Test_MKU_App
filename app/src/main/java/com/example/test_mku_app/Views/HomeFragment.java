@@ -27,9 +27,7 @@ public class HomeFragment extends Fragment {
 
     private MaterialButton buttonQuizModule;
 
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    Toolbar toolbar;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,34 +39,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-//        Hooks
-        drawerLayout = view.findViewById(R.id.fragment_container);
-        navigationView = view.findViewById(R.id.nav_view);
-        toolbar = view.findViewById(R.id.toolbar);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        if (activity != null) {
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawerLayout.addDrawerListener(toggle);
-            toggle.syncState();
-
-            view.setFocusableInTouchMode(true);
-            view.requestFocus();
-            view.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                        // Gọi onBackPressed của Activity
-                        activity.onBackPressed();
-                        return true;
-                    }
-                    return false;
-                }
-            });
-        }
-
-
-
 
 
 //        ArrayList<ModuleModel> models = new ArrayList<>();
