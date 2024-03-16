@@ -11,6 +11,23 @@ public class Constant {
 
         }
 
+        public static class Exam {
+            public static final String COLLECTION_EXAM = "exam";
+            public static final String EXAMID = "exid";
+            public static final String EXAMQUESTION = "exquestion";
+            public static final String EXAMANSWER = "exanswer";
+            public static final String EXAMCORRECT = "excorrect";
+        }
+
+        public static class Candidate{
+            public static final String COLLECTION_CANDIDATE = "candidate";
+            public static final String ID = "id";
+            public static final String NUMBERQUESTION = "numberquestion";
+            public static final String DURATION_IN_MINUTES = "durationinminutes";
+            public static final String MARKS = "marks";
+            public static final String INCORRECT = "incorrect";
+        }
+
         public static class Question {
             public static final String COLLECTION_QUESTIONS = "questions";
             public static final String ID = "id";
