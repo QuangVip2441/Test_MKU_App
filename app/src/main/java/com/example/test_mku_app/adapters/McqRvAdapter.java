@@ -21,6 +21,16 @@ public class McqRvAdapter extends RecyclerView.Adapter<McqRvAdapter.ViewHolder> 
     private ArrayList<ChoiceModel> mChoices;
     private int mSelectedItem = -1;
 
+    public int getPosition() {
+        return Position;
+    }
+
+    public void setPosition(int position) {
+        Position = position;
+    }
+
+    private int Position;
+
     public McqRvAdapter(int RESOURCE_ID, ArrayList<ChoiceModel> mChoices) {
         this.RESOURCE_ID = RESOURCE_ID;
         this.mChoices = mChoices;
@@ -59,6 +69,9 @@ public class McqRvAdapter extends RecyclerView.Adapter<McqRvAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return mChoices.size();
+    }
+    public int getSelectedItem() {
+        return mSelectedItem;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

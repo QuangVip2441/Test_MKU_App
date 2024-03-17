@@ -25,4 +25,5 @@
     <color name="primary">#1C2B71</color>
     <color name="secondary">#06CBED</color>
     <color name="color3">#11C59C</color>
+    <color name="teal_200">#FF03DAC5</color>
 </resources>
