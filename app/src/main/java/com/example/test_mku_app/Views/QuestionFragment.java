@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.test_mku_app.Models.CandidateModel;
 import com.example.test_mku_app.Models.ChoiceModel;
 import com.example.test_mku_app.Models.QuestionModel;
 import com.example.test_mku_app.R;
@@ -30,6 +31,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,6 +60,7 @@ public class QuestionFragment extends Fragment {
     private CollectionReference mRefCollectionQuestions;
     private CollectionReference mRefCollectionCandidate;
     private CollectionReference mRefCollectionExam;
+    private CandidateModel CandidateId;
     private int correctAns = 0;
     public QuestionFragment() {
     }
@@ -122,7 +126,7 @@ public class QuestionFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putInt("correctAns", correctAns);
                     if (mOrder < mQuestions.size() - 1) {
-
+                        CreateIdCandidate(mQuestions.size());
                         QuestionFragment nextFragment = new QuestionFragment(mQuestions, mOrder + 1, mSelectedModuleID);
                         nextFragment.setArguments(bundle);
                         FragmentUtils.replaceFragment(
@@ -134,7 +138,7 @@ public class QuestionFragment extends Fragment {
 
                             countDownTimer.cancel();
                         }
-                        AddCandidate(mQuestions.size(), remainingTimeMillis, correctAns, mQuestions.size() - correctAns);
+                        AddCandidate(remainingTimeMillis, correctAns, mQuestions.size() - correctAns);
                         FinishQuiz();
                     }
                 }
@@ -147,24 +151,37 @@ public class QuestionFragment extends Fragment {
                     getActivity().getSupportFragmentManager().popBackStack();
                     currentQuestion.setText("Question " + (mOrder - 1));
                 }
-
             }
         });
         loadData(view);
         return view;
     }
-    private void AddCandidate(int numberquestion, long durationinminutes, int marks, int incorrect){
+    private void AddCandidate(long durationinminutes, int marks, int incorrect){
         Map<String, Object> candidate = new HashMap<>();
-        candidate.put(Constant.Database.Candidate.NUMBERQUESTION, numberquestion);
+
         candidate.put(Constant.Database.Candidate.DURATION_IN_MINUTES, durationinminutes);
         candidate.put(Constant.Database.Candidate.MARKS, marks);
         candidate.put(Constant.Database.Candidate.INCORRECT, incorrect);
 
+        mRefCollectionCandidate.add(candidate).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                String id = CandidateId.getId();
+                Map<String, Object> update = new HashMap<>();
+                update.put(Constant.Database.Candidate.ID, id);
+                mRefCollectionCandidate.document(id).update(update);
+            }
+        });
+    }
+    private void CreateIdCandidate(int numberquestion){
+        Map<String, Object> candidate = new HashMap<>();
+        candidate.put(Constant.Database.Candidate.NUMBERQUESTION, numberquestion);
         mRefCollectionCandidate = mFirestore.collection(Constant.Database.Candidate.COLLECTION_CANDIDATE);
         mRefCollectionCandidate.add(candidate).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 String id = documentReference.getId();
+                CandidateId.setId(id);
                 Map<String, Object> update = new HashMap<>();
                 update.put(Constant.Database.Candidate.ID, id);
                 mRefCollectionCandidate.document(id).update(update);
@@ -172,14 +189,25 @@ public class QuestionFragment extends Fragment {
         });
     }
     // Mai làm tiếp
-
     private void AddExam (String exquestion, String exanswer, String excorrect){
         Map<String, Object> exam = new HashMap<>();
         exam.put(Constant.Database.Exam.EXAMQUESTION, exquestion);
         exam.put(Constant.Database.Exam.EXAMANSWER, exanswer);
         exam.put(Constant.Database.Exam.EXAMCORRECT, excorrect);
 
-
+        mRefCollectionCandidate = mFirestore
+                .collection(Constant.Database.Candidate.COLLECTION_CANDIDATE)
+                .document(CandidateId.getId()).getParent();
+        mRefCollectionExam = mRefCollectionCandidate.getParent().collection(Constant.Database.Exam.COLLECTION_EXAM);
+        mRefCollectionExam.add(exam).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                String id = documentReference.getId();
+                Map<String, Object> update = new HashMap<>();
+                update.put(Constant.Database.Candidate.ID,id);
+                mRefCollectionExam.document(id).update(update);
+            }
+        });
     }
     private void loadData(View view) {
         if (mQuestions.size() > 0) {

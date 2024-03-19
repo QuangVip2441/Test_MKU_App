@@ -43,9 +43,6 @@ public class AddModuleFragment extends Fragment {
 
         mFirestore = FirebaseFirestore.getInstance();
 
-//        addModule("IU01", "Microsoft Word", 50);
-//        addModule("IU02", "Microsoft Excel", 50);
-//        addModule("IU03", "Microsoft Power Point", 50);
 
         //deleteAllModules();
         addModule("IU01","Hiểu biết về CNTT cơ bản",50);

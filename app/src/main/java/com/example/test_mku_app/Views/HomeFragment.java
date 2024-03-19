@@ -1,5 +1,7 @@
 package com.example.test_mku_app.Views;
 
+import static com.example.test_mku_app.R.id.fragment_container;
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -8,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -15,18 +18,21 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.example.test_mku_app.Models.ModuleModel;
 import com.example.test_mku_app.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private MaterialButton buttonQuizModule;
-
+    private ImageView imgModule;
 
 
     @Override
@@ -40,14 +46,14 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        ArrayList<ModuleModel> models = new ArrayList<>();
+        models.add(new ModuleModel("Kusy65zYEQRHwBD4xK5w","IU01","Hiểu biết về CNTT cơ bản",50));
+        models.add(new ModuleModel("RcNqOW5J0USOZIhOzMbR","IU02","Sử dụng máy tính cơ bản",50));
+        models.add(new ModuleModel("vmuX6BOAwIpFyjAeOdiQ","IU03","Xử lý văn bản cơ bản",50));
+        models.add(new ModuleModel("ehP8B1XstrJw3ypJ3dSH","IU04","Sử dụng bảng tính cơ bản",50));
+        models.add(new ModuleModel("Sc1vj2JOhi4uxHeHeTpR","IU05","Sử dụng trình chiếu cơ bản",50));
+        models.add(new ModuleModel("oqiGmECxloO32EoYG4PF","IU06","Sử dụng Internet cơ bản",50));
 
-//        ArrayList<ModuleModel> models = new ArrayList<>();
-//        models.add(new ModuleModel("dp7OLmrhP43fOxYfD7m0","IU01","Hiểu biết về CNTT cơ bản",50));
-//        models.add(new ModuleModel("KJgiMny2wQpnZ8UCwiyc","IU02","Sử dụng máy tính cơ bản",50));
-//        models.add(new ModuleModel("C3l6DLBNocOn2ho4SMGj","IU03","Xử lý văn bản cơ bản",50));
-//        models.add(new ModuleModel("p25xVy0FGbvUeCTet8lG","IU04","Sử dụng bảng tính cơ bản",50));
-//        models.add(new ModuleModel("SFevDrt8D3rjHDqn5KeX","IU05","Sử dụng trình chiếu cơ bản",50));
-//        models.add(new ModuleModel("3lsHiGSUMaFQkdkagIx0","IU06","Sử dụng Internet cơ bản",50));
 
         List<Integer> buttonIds = Arrays.asList(
                 R.id.buttonQuizModule1,
@@ -58,29 +64,36 @@ public class HomeFragment extends Fragment {
                 R.id.buttonQuizModule6
         );
 
-//        for (Integer buttonId : buttonIds) {
-//            buttonQuizModule = view.findViewById(buttonId);
-//            buttonQuizModule.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    int index = buttonIds.indexOf(view.getId());
-//                    if (index >= 0 && index < models.size()) {
-//                        String moduleID = models.get(index).getId();
-//                        StartFragment startFragment = new StartFragment();
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("Key",moduleID);
-//
-//                        startFragment.setArguments(bundle);
-//
-//
-//                        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-//                        transaction.replace(R.id.fragment_container, startFragment);
-//                        transaction.addToBackStack(null);
-//                        transaction.commit();
-//                    }
-//                }
-//            });
-//        }
+        for (Integer buttonId : buttonIds) {
+            imgModule = view.findViewById(buttonId);
+            imgModule.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Duyệt qua từng buttonId trong danh sách
+                    for (int i = 0; i < buttonIds.size(); i++) {
+                        // So sánh id của view với id của button hiện tại
+                        if (view.getId() == buttonIds.get(i)) {
+                            // Nếu khớp, lấy chỉ số của button trong danh sách để lấy moduleID tương ứng
+                            if (i >= 0 && i < models.size()) {
+                                String moduleID = models.get(i).getId();
+                                StartFragment startFragment = new StartFragment();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("Key", moduleID);
+
+                                startFragment.setArguments(bundle);
+
+                                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                                transaction.replace(fragment_container, startFragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                                break; // Thoát khỏi vòng lặp sau khi xử lý
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
         return view;
     }
 

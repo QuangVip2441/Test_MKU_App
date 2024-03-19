@@ -2,6 +2,9 @@ package com.example.test_mku_app.Views;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.test_mku_app.R;
+import com.example.test_mku_app.ultils.FragmentUtils;
 
 public class StartFragment extends Fragment {
 
@@ -24,4 +28,36 @@ public class StartFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_start, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final AppCompatButton btnStartQuiz = view.findViewById(R.id.btnStartQuiz);
+        final AppCompatButton btnQuit = view.findViewById(R.id.btnQuit);
+
+        btnStartQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = getArguments();
+                if (bundle != null) {
+                    String moduleID = bundle.getString("Key");
+                    FragmentUtils.replaceFragment(
+                            getActivity().getSupportFragmentManager(),
+                            new QuestionFragment(0, moduleID),
+                            false
+                    );
+                }else {
+                    getParentFragmentManager().popBackStack();
+                }
+            }
+        });
+
+        btnQuit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getParentFragmentManager().popBackStack();
+            }
+        });
+    }
+
 }
