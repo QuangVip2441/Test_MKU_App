@@ -56,9 +56,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="5dp"/>
 
-
     </RelativeLayout>
-
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:layout_width="match_parent"

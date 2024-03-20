@@ -2,6 +2,7 @@ package com.example.test_mku_app.Views;
 
 import static com.example.test_mku_app.R.id.fragment_container;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.test_mku_app.Models.ModuleModel;
 import com.example.test_mku_app.R;
@@ -64,6 +67,7 @@ public class HomeFragment extends Fragment {
                 R.id.buttonQuizModule6
         );
 
+
         for (Integer buttonId : buttonIds) {
             imgModule = view.findViewById(buttonId);
             imgModule.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +87,7 @@ public class HomeFragment extends Fragment {
                                 startFragment.setArguments(bundle);
 
                                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                                transaction.replace(fragment_container, startFragment);
+                                transaction.replace(R.id.fragment_container, startFragment);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
                                 break; // Thoát khỏi vòng lặp sau khi xử lý
