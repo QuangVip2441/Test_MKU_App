@@ -46,6 +46,7 @@ public class Constant {
         public class User {
             public static final String COLLECTION_USER = "user";
             public static final String ID = "id"; //--
+            public static final String MSSV = "mssv"; //--
             public static final String EMAIL = "email";//--
             public static final String TOKEN = "token";
             public static final String USERNAME = "username";//--
