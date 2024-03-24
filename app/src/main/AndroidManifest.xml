@@ -13,16 +13,16 @@
         android:theme="@style/Theme.Test_MKU_App"
         tools:targetApi="31">
         <activity
+            android:name=".Views.UpLoadImageProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Views.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Views.Activity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".Views.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
