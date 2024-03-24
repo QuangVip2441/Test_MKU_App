@@ -56,20 +56,16 @@
         <Button
             android:id="@+id/btnLogin"
             android:layout_gravity="right"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorOrange"
-            android:width="200dp"
-            android:height="54dp"
-            android:angle="45"
             android:centerX="35%"
-            android:startColor="#FC8822"
-            android:endColor="#FFB129"
             android:type="linear"
             android:layout_marginTop="20dp"
             android:radius="27dp"
             android:textColor="@color/whiteTextColor"
             android:textStyle="bold"
+            android:textSize="18sp"
             android:text="Đăng nhập"
             />
 
@@ -81,6 +77,7 @@
             android:textAlignment="textEnd"
             android:textColor="@color/primaryTextColor"
             android:textStyle="bold"
+            android:textSize="15sp"
             android:layout_marginRight="40dp"
             android:gravity="end"/>
     </LinearLayout>
