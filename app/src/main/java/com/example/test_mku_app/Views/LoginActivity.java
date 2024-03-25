@@ -3,6 +3,7 @@ package com.example.test_mku_app.Views;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.test_mku_app.MainActivity;
 import com.example.test_mku_app.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -82,11 +84,11 @@ public class LoginActivity extends AppCompatActivity {
         String password = edtPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            edtEmail.setError("Email is required.");
+            edtEmail.setError("Email rỗng");
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            edtPassword.setError("Password is required.");
+            edtPassword.setError("Mật khẩu rỗng");
             return;
         }
 
@@ -94,13 +96,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    //                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                    //                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    //                    startActivity(intent);
-                    //                    finish();
-                    Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    String userID = mAuth.getCurrentUser().getUid();
+                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                    intent.putExtra("userID", userID);
+                    startActivity(intent);
                 }else
-                    Toast.makeText(LoginActivity.this, "Email or Password incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Email hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
             }
         });
     }

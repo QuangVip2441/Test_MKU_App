@@ -11,17 +11,21 @@ public class Constant {
 
         }
 
+        // Từng câu
         public static class Exam {
             public static final String COLLECTION_EXAM = "exam";
             public static final String EXAMID = "exid";
             public static final String EXAMQUESTION = "exquestion";
-            public static final String EXAMANSWER = "exanswer";
+            public static final String EXAMANSWER = "exanswer"; // user choosed answer
             public static final String EXAMCORRECT = "excorrect";
         }
 
+        // Từng bài thi
         public static class Candidate{
             public static final String COLLECTION_CANDIDATE = "candidate";
             public static final String ID = "id";
+            public static final String START_TIMER = "start_timer";
+            public static final String END_TIMER = "end_timer";
             public static final String NUMBERQUESTION = "numberquestion";
             public static final String DURATION_IN_MINUTES = "durationinminutes";
             public static final String MARKS = "marks";

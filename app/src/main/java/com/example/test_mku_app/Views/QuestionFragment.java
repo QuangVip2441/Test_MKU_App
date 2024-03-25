@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -62,6 +64,11 @@ public class QuestionFragment extends Fragment {
     private CollectionReference mRefCollectionExam;
     private CandidateModel CandidateId;
     private int correctAns = 0;
+    // Sau này thời gian lấy theo fire base do admin set
+    private int Test_timer = 600;
+
+    private Handler handler;
+    private Runnable updateTimeRunnable;
     public QuestionFragment() {
     }
 
@@ -105,7 +112,6 @@ public class QuestionFragment extends Fragment {
         if (bundle != null) {
             correctAns = bundle.getInt("correctAns", 0);
         }
-        startQuizTimer(60);
         currentQuestion.setText("Question " + (mOrder + 1));
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +124,9 @@ public class QuestionFragment extends Fragment {
                     QuestionModel currentQuestion = mQuestions.get(mOrder);
                     ChoiceModel selectedChoice = currentQuestion.getChoices().get(selectedPosition);
                     String selectId = selectedChoice.getId();
+                    String questioncontent = currentQuestion.getContent();
                     String current = currentQuestion.getCorrect();
+                    AddExam(questioncontent, selectId, current);
                     if (selectId.equals(current)) {
                         correctAns++;
                     }
@@ -138,7 +146,10 @@ public class QuestionFragment extends Fragment {
 
                             countDownTimer.cancel();
                         }
-                        AddCandidate(remainingTimeMillis, correctAns, mQuestions.size() - correctAns);
+                        //Thiếu thêm vào sqlite
+
+
+                        AddCandidate(correctAns, mQuestions.size() - correctAns);
                         FinishQuiz();
                     }
                 }
@@ -156,10 +167,25 @@ public class QuestionFragment extends Fragment {
         loadData(view);
         return view;
     }
-    private void AddCandidate(long durationinminutes, int marks, int incorrect){
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Bắt đầu đếm ngược thời gian khi Fragment được hiển thị lại
+        startQuizTimer(Test_timer);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Dừng đếm ngược thời gian khi Fragment bị tạm dừng
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
+    private void AddCandidate(int marks, int incorrect){
         Map<String, Object> candidate = new HashMap<>();
 
-        candidate.put(Constant.Database.Candidate.DURATION_IN_MINUTES, durationinminutes);
         candidate.put(Constant.Database.Candidate.MARKS, marks);
         candidate.put(Constant.Database.Candidate.INCORRECT, incorrect);
 
@@ -284,12 +310,10 @@ public class QuestionFragment extends Fragment {
         countDownTimer = new CountDownTimer(maxTimeInseconds * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                long getHour = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
-                long getMinute = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
-                long getSecond = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+                long getMinute = TimeUnit.SECONDS.toMinutes(millisUntilFinished / 1000);
+                long getSecond = TimeUnit.SECONDS.toSeconds(millisUntilFinished / 1000) % 60;
 
-                String generatetime = String.format(Locale.getDefault(),"%02d:%02d", getMinute,
-                        getSecond - TimeUnit.MINUTES.toSeconds(getMinute));
+                String generatetime = String.format(Locale.getDefault(),"%02d:%02d", getMinute, getSecond);
                 remainingTimeMillis = millisUntilFinished;
 
                 QuizTimer.setText(generatetime);
@@ -299,12 +323,16 @@ public class QuestionFragment extends Fragment {
             public void onFinish() {
                 // finish Quiz when time is finished
                 FinishQuiz();
+                // gán thời gian kết thúc lên firebase
+                Map<String, Object> candidate = new HashMap<>();
+                candidate.put(Constant.Database.Candidate.END_TIMER, ServerValue.TIMESTAMP);
             }
         };
 
-        //Start Timer
+        // Start Timer
         countDownTimer.start();
     }
+
 
     private void FinishQuiz(){
         // back to fragment
