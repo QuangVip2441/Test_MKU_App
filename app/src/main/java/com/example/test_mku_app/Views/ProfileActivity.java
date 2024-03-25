@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -59,23 +60,25 @@ public class ProfileActivity extends AppCompatActivity {
         imgbtnChangeAvtImage = findViewById(R.id.imgbtnChangeAvtImage);
         imageAvt = findViewById(R.id.imageAvt);
 
-        user = FirebaseAuth.getInstance().getCurrentUser();;
-        userID = user.getUid();
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageReference = storage.getReference("images").child(userID);
+        databaseReference = FirebaseDatabase.getInstance().getReference("user");
 
-        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-        String name = sharedPreferences.getString(Kname,null);
-        String mssv = sharedPreferences.getString(Kmssv,null);
-        String phone = sharedPreferences.getString(Kphone,null);
-        String email = sharedPreferences.getString(Kemai,null);
+//        user = FirebaseAuth.getInstance().getCurrentUser();;
+//        userID = user.getUid();
+//        FirebaseStorage storage = FirebaseStorage.getInstance();
+//        StorageReference storageReference = storage.getReference("images").child(userID);
 
-        if (name != null || phone != null || email != null){
-            txtEmail.setText(email);
-            txtUsername.setText(name);
-            txtPhoneNumber.setText(phone);
-            txtMSSV.setText(mssv);
-        }
+//        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+//        String name = sharedPreferences.getString(Kname,null);
+//        String mssv = sharedPreferences.getString(Kmssv,null);
+//        String phone = sharedPreferences.getString(Kphone,null);
+//        String email = sharedPreferences.getString(Kemai,null);
+//
+//        if (name != null || phone != null || email != null){
+//            txtEmail.setText(email);
+//            txtUsername.setText(name);
+//            txtPhoneNumber.setText(phone);
+//            txtMSSV.setText(mssv);
+//        }
 
         //txtChangePassword dùng để thay đổi mật khẩu
         txtChangePassword.setOnClickListener(new View.OnClickListener() {
@@ -87,47 +90,47 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");
 
-//        databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-//            String name, phone, email, mssv;
+        databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            String name, phone, email, mssv;
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                UserModel userModel = snapshot.getValue(UserModel.class);
+               if (userModel != null) {
+                   name = userModel.getUsername();
+                   email = userModel.getEmail();
+                   phone = userModel.getPhone();
+                   mssv = userModel.getMssv();
+
+                   txtEmail.setText(email);
+                   txtUsername.setText(name);
+                   txtPhoneNumber.setText(phone);
+                   txtMSSV.setText(mssv);
+               }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG,"Failed to read value", error.toException());
+            }
+        });
+
+//        imgbtnChangeAvtImage.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                UserModel userModel = snapshot.getValue(UserModel.class);
-//
-//               if (userModel != null) {
-//                   name = userModel.getUsername();
-//                   email = userModel.getEmail();
-//                   phone = userModel.getPhone();
-//                   mssv = userModel.getMssv();
-//
-//                   txtEmail.setText(email);
-//                   txtUsername.setText(name);
-//                   txtPhoneNumber.setText(phone);
-//                   txtMSSV.setText(mssv);
-//               }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.w(TAG,"Failed to read value", error.toException());
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ProfileActivity.this, UpLoadImageProfileActivity.class);
+//                intent.putExtra("userID", userID);
+//                startActivity(intent);
 //            }
 //        });
-
-        imgbtnChangeAvtImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, UpLoadImageProfileActivity.class);
-                intent.putExtra("userID", userID);
-                startActivity(intent);
-            }
-        });
-        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get()
-                        .load(uri)
-                        .into(imageAvt);
-            }
-        });
+//        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                Picasso.get()
+//                        .load(uri)
+//                        .into(imageAvt);
+//            }
+//        });
 
     }
 }
