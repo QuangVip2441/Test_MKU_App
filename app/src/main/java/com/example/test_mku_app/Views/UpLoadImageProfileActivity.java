@@ -96,7 +96,7 @@ public class UpLoadImageProfileActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(UpLoadImageProfileActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpLoadImageProfileActivity.this, "Đã đăng tải ảnh", Toast.LENGTH_SHORT).show();
                         }else
                             Toast.makeText(UpLoadImageProfileActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();

@@ -52,11 +52,13 @@
                            android:id="@+id/imageAvt"
                            android:layout_width="120dp"
                            android:layout_height="120dp"
+                           android:scaleType="centerCrop"
+                           app:shapeAppearanceOverlay="@style/circular"
                            app:srcCompat="@drawable/no_profile" />
                        <ImageButton
                            android:id="@+id/imgbtnChangeAvtImage"
-                           android:layout_width="46dp"
-                           android:layout_height="46dp"
+                           android:layout_width="45dp"
+                           android:layout_height="45dp"
                            android:src="@drawable/ic_mode_edit_avtimg"
                            android:layout_marginStart="80dp"
                            android:layout_marginTop="-40dp"/>
@@ -155,7 +157,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
                                     android:layout_marginBottom="8dp"
-                                    android:text="Study"
+                                    android:text="Kiến thức"
                                     android:textAlignment="center"
                                     android:textColor="#000000"
                                     android:textSize="13sp"
@@ -195,7 +197,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
                                     android:layout_marginBottom="8dp"
-                                    android:text="Student"
+                                    android:text="Con người"
                                     android:textAlignment="center"
                                     android:textColor="#000000"
                                     android:textSize="13sp"
@@ -235,7 +237,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
                                     android:layout_marginBottom="8dp"
-                                    android:text="Computer"
+                                    android:text="Công nghệ"
                                     android:textAlignment="center"
                                     android:textColor="#000000"
                                     android:textSize="13sp"
@@ -257,7 +259,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Password:"
+                                android:text="Mật khẩu:"
                                 android:textColor="#182693"
                                 android:textSize="18sp" />
 
@@ -266,7 +268,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Change"
+                                android:text="Đổi mật khẩu"
                                 android:textAlignment="viewEnd"
                                 android:textColor="#5B5B5B"
                                 android:textSize="16sp" />
@@ -330,7 +332,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Phone:"
+                                android:text="Điện thoại:"
                                 android:textColor="#182693"
                                 android:textSize="18sp" />
 
@@ -351,7 +353,7 @@
                 android:id="@+id/btnEditProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Profile"
+                android:text="Cập nhật thông tin"
                 android:backgroundTint="@color/teal_200"
                 android:layout_margin="24dp"/>
         </LinearLayout>

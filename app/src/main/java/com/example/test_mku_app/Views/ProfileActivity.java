@@ -37,8 +37,6 @@ public class ProfileActivity extends AppCompatActivity {
     private Button btnEditProfile;
     private ImageButton imgbtnChangeAvtImage;
     private ImageView imageAvt;
-    private FirebaseUser user;
-    private String userID;
     SharedPreferences sharedPreferences;
     private DatabaseReference databaseReference;
     private static final String SHARED_PREF_NAME = "user";
@@ -62,23 +60,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("user");
 
-//        user = FirebaseAuth.getInstance().getCurrentUser();;
-//        userID = user.getUid();
-//        FirebaseStorage storage = FirebaseStorage.getInstance();
-//        StorageReference storageReference = storage.getReference("images").child(userID);
-
-//        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-//        String name = sharedPreferences.getString(Kname,null);
-//        String mssv = sharedPreferences.getString(Kmssv,null);
-//        String phone = sharedPreferences.getString(Kphone,null);
-//        String email = sharedPreferences.getString(Kemai,null);
-//
-//        if (name != null || phone != null || email != null){
-//            txtEmail.setText(email);
-//            txtUsername.setText(name);
-//            txtPhoneNumber.setText(phone);
-//            txtMSSV.setText(mssv);
-//        }
 
         //txtChangePassword dùng để thay đổi mật khẩu
         txtChangePassword.setOnClickListener(new View.OnClickListener() {
@@ -90,11 +71,13 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");
 
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference("images").child(userID);
+
         databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             String name, phone, email, mssv;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 UserModel userModel = snapshot.getValue(UserModel.class);
                if (userModel != null) {
                    name = userModel.getUsername();
@@ -115,22 +98,22 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-//        imgbtnChangeAvtImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ProfileActivity.this, UpLoadImageProfileActivity.class);
-//                intent.putExtra("userID", userID);
-//                startActivity(intent);
-//            }
-//        });
-//        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.get()
-//                        .load(uri)
-//                        .into(imageAvt);
-//            }
-//        });
+        imgbtnChangeAvtImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, UpLoadImageProfileActivity.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
+        });
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get()
+                        .load(uri)
+                        .into(imageAvt);
+            }
+        });
 
     }
 }
