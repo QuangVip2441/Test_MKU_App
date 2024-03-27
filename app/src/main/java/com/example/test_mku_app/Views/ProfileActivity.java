@@ -4,6 +4,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.ContentLoadingProgressBar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageButton imgbtnChangeAvtImage;
     private ImageView imageAvt;
     SharedPreferences sharedPreferences;
+    private ContentLoadingProgressBar progressBar;
     private DatabaseReference databaseReference;
     private static final String SHARED_PREF_NAME = "user";
     private static final String Kname = "username";
@@ -57,23 +59,34 @@ public class ProfileActivity extends AppCompatActivity {
         btnEditProfile = findViewById(R.id.btnEditProfile);
         imgbtnChangeAvtImage = findViewById(R.id.imgbtnChangeAvtImage);
         imageAvt = findViewById(R.id.imageAvt);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("user");
 
 
         //txtChangePassword dùng để thay đổi mật khẩu
-        txtChangePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Change Password
-            }
-        });
+
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference("images").child(userID);
-
+        txtChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //change password
+            }
+        });
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
+        });
+        progressBar.show();
         databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             String name, phone, email, mssv;
             @Override
@@ -89,6 +102,8 @@ public class ProfileActivity extends AppCompatActivity {
                    txtUsername.setText(name);
                    txtPhoneNumber.setText(phone);
                    txtMSSV.setText(mssv);
+
+                   progressBar.hide();
                }
             }
 
