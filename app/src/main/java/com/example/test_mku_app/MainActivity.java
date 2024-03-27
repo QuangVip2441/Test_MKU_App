@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -16,8 +17,11 @@ import com.example.test_mku_app.Models.QuestionModel;
 import com.example.test_mku_app.Views.AddModuleFragment;
 import com.example.test_mku_app.Views.AddQuestionFragment;
 import com.example.test_mku_app.Views.HomeFragment;
+import com.example.test_mku_app.Views.LoginActivity;
+import com.example.test_mku_app.Views.ProfileActivity;
 import com.example.test_mku_app.ultils.FragmentUtils;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -25,9 +29,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList<QuestionModel> mQuestions;
     HomeFragment homeFragment = new HomeFragment();
 
+
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
-        //mQuestions = getMCQ();
 
         //Toolbar
         setSupportActionBar(toolbar);
@@ -48,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_home);
+
 
         replaceFragment(new HomeFragment());
     }
@@ -69,49 +74,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 false);
     }
 
-    private ArrayList<QuestionModel> getMCQ() {
-        ArrayList<QuestionModel> questions = new ArrayList<>();
-
-        questions.clear();
-
-        ArrayList<ChoiceModel> choices = new ArrayList<>();
-        choices.add(new ChoiceModel("1", "Word"));
-        choices.add(new ChoiceModel("2", "Excel"));
-        choices.add(new ChoiceModel("3", "Power Point aaaaaaa aaaa aaaaa aaaaaaa aaaa aaaaa aaaaaa aaaa aaaaa aaaaaa aaaa aaaaa aaaaaaa"));
-        choices.add(new ChoiceModel("4", "Calculator"));
-        questions.add( new QuestionModel(
-                "1",
-                "Trong Windows, phan mem may tinh co ten gì?",
-                choices,
-                "4"
-        ));
-
-        choices = new ArrayList<>();
-        choices.add(new ChoiceModel("1", "Word"));
-        choices.add(new ChoiceModel("2", "Excel"));
-        choices.add(new ChoiceModel("3", "Power Point"));
-        choices.add(new ChoiceModel("4", "Calculator"));
-        questions.add( new QuestionModel(
-                "2",
-                "Trong Windows, phan mem go van ban?",
-                choices,
-                "1"
-        ));
-
-        choices = new ArrayList<>();
-        choices.add(new ChoiceModel("1", "Mathlab"));
-        choices.add(new ChoiceModel("2", "Excel"));
-        choices.add(new ChoiceModel("3", "Google"));
-        choices.add(new ChoiceModel("4", "Calculator"));
-        questions.add( new QuestionModel(
-                "3",
-                "Trong Windows, phan mem xu ly bang tinh?",
-                choices,
-                "3"
-        ));
-
-        return questions;
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -127,6 +89,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         } else if (itemId == R.id.nav_profile) {
             // call activity or fragment profile
+            Intent intent1 = getIntent();
+            String userID = intent1.getStringExtra("userID");
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
             return true;
         } else if (itemId == R.id.nav_logout) {
             // call activity or fragment logout
@@ -141,4 +108,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
+
+
 }

@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.test_mku_app.Models.ModuleModel;
@@ -35,8 +36,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private MaterialButton buttonQuizModule;
-    private ImageView imgModule;
-
+    private ImageView buttonQuizModule1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,46 +57,55 @@ public class HomeFragment extends Fragment {
         models.add(new ModuleModel("Sc1vj2JOhi4uxHeHeTpR","IU05","Sử dụng trình chiếu cơ bản",50));
         models.add(new ModuleModel("oqiGmECxloO32EoYG4PF","IU06","Sử dụng Internet cơ bản",50));
 
+        buttonQuizModule1 = view.findViewById(R.id.buttonQuizModule1);
 
-        List<Integer> buttonIds = Arrays.asList(
-                R.id.buttonQuizModule1,
-                R.id.buttonQuizModule2,
-                R.id.buttonQuizModule3,
-                R.id.buttonQuizModule4,
-                R.id.buttonQuizModule5,
-                R.id.buttonQuizModule6
-        );
+        buttonQuizModule1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"Success",Toast.LENGTH_LONG).show();
+            }
+        });
 
 
-        for (Integer buttonId : buttonIds) {
-            imgModule = view.findViewById(buttonId);
-            imgModule.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // Duyệt qua từng buttonId trong danh sách
-                    for (int i = 0; i < buttonIds.size(); i++) {
-                        // So sánh id của view với id của button hiện tại
-                        if (view.getId() == buttonIds.get(i)) {
-                            // Nếu khớp, lấy chỉ số của button trong danh sách để lấy moduleID tương ứng
-                            if (i >= 0 && i < models.size()) {
-                                String moduleID = models.get(i).getId();
-                                StartFragment startFragment = new StartFragment();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("Key", moduleID);
+//        List<Integer> buttonIds = Arrays.asList(
+//                R.id.buttonQuizModule1,
+//                R.id.buttonQuizModule2,
+//                R.id.buttonQuizModule3,
+//                R.id.buttonQuizModule4,
+//                R.id.buttonQuizModule5,
+//                R.id.buttonQuizModule6
+//        );
 
-                                startFragment.setArguments(bundle);
 
-                                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                                transaction.replace(R.id.fragment_container, startFragment);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
-                                break; // Thoát khỏi vòng lặp sau khi xử lý
-                            }
-                        }
-                    }
-                }
-            });
-        }
+//        for (Integer buttonId : buttonIds) {
+//            imgModule = view.findViewById(buttonId);
+//            imgModule.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    // Duyệt qua từng buttonId trong danh sách
+//                    for (int i = 0; i < buttonIds.size(); i++) {
+//                        // So sánh id của view với id của button hiện tại
+//                        if (view.getId() == buttonIds.get(i)) {
+//                            // Nếu khớp, lấy chỉ số của button trong danh sách để lấy moduleID tương ứng
+//                            if (i >= 0 && i < models.size()) {
+//                                String moduleID = models.get(i).getId();
+//                                StartFragment startFragment = new StartFragment();
+//                                Bundle bundle = new Bundle();
+//                                bundle.putString("Key", moduleID);
+//
+//                                startFragment.setArguments(bundle);
+//
+//                                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+//                                transaction.replace(R.id.fragment_container, startFragment);
+//                                transaction.addToBackStack(null);
+//                                transaction.commit();
+//                                break; // Thoát khỏi vòng lặp sau khi xử lý
+//                            }
+//                        }
+//                    }
+//                }
+//            });
+//        }
 
         return view;
     }

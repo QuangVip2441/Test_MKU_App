@@ -14,12 +14,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -109,6 +109,7 @@
                         android:indeterminate="true"
                         style="?android:attr/progressBarStyle"
                         android:id="@+id/progressBar"/>
+
                     <LinearLayout
                         android:id="@+id/linearLayout"
                         android:layout_width="match_parent"
