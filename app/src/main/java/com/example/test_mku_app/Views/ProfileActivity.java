@@ -4,6 +4,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.ContentLoadingProgressBar;
 
 import android.content.Intent;
@@ -41,6 +42,8 @@ public class ProfileActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private ContentLoadingProgressBar progressBar;
     private DatabaseReference databaseReference;
+    private FirebaseUser user;
+    private String userID = "";
     private static final String SHARED_PREF_NAME = "user";
     private static final String Kname = "username";
     private static final String Kemai = "email";
@@ -63,12 +66,14 @@ public class ProfileActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //txtChangePassword dùng để thay đổi mật khẩu
-
-        Intent intent = getIntent();
-        String userID = intent.getStringExtra("userID");
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference("images").child(userID);

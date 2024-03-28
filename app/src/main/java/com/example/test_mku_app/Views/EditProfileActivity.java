@@ -2,6 +2,7 @@ package com.example.test_mku_app.Views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.ContentLoadingProgressBar;
 
 import android.content.Intent;
@@ -50,6 +51,10 @@ public class EditProfileActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("user");
 
+
+        Toolbar toolbar = findViewById(R.id.toolbaredit);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");

@@ -22,6 +22,9 @@ import com.example.test_mku_app.Views.ProfileActivity;
 import com.example.test_mku_app.ultils.FragmentUtils;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -29,10 +32,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList<QuestionModel> mQuestions;
     HomeFragment homeFragment = new HomeFragment();
 
-
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    private String userID = "";
+    private FirebaseUser user;
+    private DatabaseReference databaseReference;
 
 
     @Override
@@ -45,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        userID = user.getUid();
         //Toolbar
         setSupportActionBar(toolbar);
         //Nav drawer menu
@@ -53,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
+        navigationView.setCheckedItem(R.id.nav_home);
 
         replaceFragment(new HomeFragment());
     }
@@ -75,10 +83,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.nav_home){
+            onBackPressed();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, homeFragment).commit();
             return true;
         }else if (itemId == R.id.nav_document){
@@ -89,10 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         } else if (itemId == R.id.nav_profile) {
             // call activity or fragment profile
-            Intent intent1 = getIntent();
-            String userID = intent1.getStringExtra("userID");
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-            intent.putExtra("userID", userID);
             startActivity(intent);
             return true;
         } else if (itemId == R.id.nav_logout) {
@@ -108,6 +115,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
-
 
 }
