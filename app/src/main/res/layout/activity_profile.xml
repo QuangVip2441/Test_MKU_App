@@ -36,9 +36,7 @@
                             android:background="@drawable/top_background"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                            app:layout_constraintTop_toTopOf="parent"/>
 
                         <LinearLayout
                             android:id="@+id/LinearAVTIMG"
