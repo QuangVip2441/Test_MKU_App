@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment {
         models.add(new ModuleModel("Sc1vj2JOhi4uxHeHeTpR","IU05","Sử dụng trình chiếu cơ bản",50));
         models.add(new ModuleModel("oqiGmECxloO32EoYG4PF","IU06","Sử dụng Internet cơ bản",50));
 
-        buttonQuizModule1 = view.findViewById(R.id.buttonQuizModule1);
+        //buttonQuizModule1 = view.findViewById(R.id.buttonQuizModule1);
 
         buttonQuizModule1.setOnClickListener(new View.OnClickListener() {
             @Override
