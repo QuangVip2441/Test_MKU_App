@@ -1,6 +1,5 @@
 package com.example.test_mku_app.Views;
 
-import static com.example.test_mku_app.R.id.fragment_container;
 
 import android.nfc.Tag;
 import android.os.Bundle;

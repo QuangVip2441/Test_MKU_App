@@ -18,6 +18,7 @@ import com.example.test_mku_app.Views.AddModuleFragment;
 import com.example.test_mku_app.Views.AddQuestionFragment;
 import com.example.test_mku_app.Views.HomeFragment;
 import com.example.test_mku_app.Views.LoginActivity;
+import com.example.test_mku_app.Views.MainFragment;
 import com.example.test_mku_app.Views.ProfileActivity;
 import com.example.test_mku_app.ultils.FragmentUtils;
 import com.google.android.material.navigation.NavigationView;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
 
-        replaceFragment(new HomeFragment());
+        replaceFragment(new MainFragment());
     }
 
     @Override
