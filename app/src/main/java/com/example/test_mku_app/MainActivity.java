@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
 
-        replaceFragment(new MainFragment());
+        replaceFragment(new HomeFragment());
     }
 
     @Override

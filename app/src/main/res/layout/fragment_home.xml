@@ -4,30 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Views.HomeFragment"
-    android:background="@drawable/bg_edit_profile">
-
+    tools:context=".Views.HomeFragment">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_edit_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="40dp">
-            
+
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/relativeLayout1"
+                android:id="@+id/constraintop"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:background="@drawable/background_module">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -41,13 +46,11 @@
                             app:shapeAppearanceOverlay="@style/circular"
                             app:srcCompat="@drawable/ic_main" />
                     </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-34dp"
                         android:orientation="vertical">
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -56,7 +59,6 @@
                             android:textStyle="bold"
                             android:textColor="@color/whiteTextColor"
                             android:layout_marginLeft="20dp"/>
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -74,16 +76,14 @@
                             android:textColor="@color/whiteTextColor"
                             android:layout_marginLeft="80dp"
                             />
-
                     </LinearLayout>
-
                 </LinearLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="-80dp">
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/constraintop">
                 <GridLayout
                     android:id="@+id/gridmodule1"
                     android:layout_width="match_parent"
@@ -93,7 +93,6 @@
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="25dp"
                     android:layout_marginTop="20dp">
-
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
@@ -104,7 +103,6 @@
                         android:layout_margin="12dp"
                         app:cardPreventCornerOverlap="false"
                         app:cardElevation="12dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -115,7 +113,6 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:layout_gravity="start">
-
                                 <ImageView
                                     android:id="@+id/imgmodule1"
                                     android:layout_width="123dp"
@@ -131,12 +128,10 @@
                                     android:layout_marginLeft="15dp"
                                     />
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="212dp"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -153,7 +148,6 @@
                                     android:gravity="center"
                                     android:textColor="@color/colorBlue"
                                     android:text="'Hiểu biết về Công Nghệ Thông Tin cơ bản.'"/>
-
                                 <View
                                     android:id="@+id/view2"
                                     android:layout_width="match_parent"
@@ -171,7 +165,6 @@
                                     android:textStyle="italic"
                                     />
                             </LinearLayout>
-
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </GridLayout>
@@ -185,7 +178,6 @@
                     android:layout_marginRight="25dp"
                     android:layout_below="@id/gridmodule1"
                     android:layout_marginTop="20dp">
-
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
@@ -196,7 +188,6 @@
                         android:layout_margin="12dp"
                         app:cardPreventCornerOverlap="false"
                         app:cardElevation="12dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -207,13 +198,11 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:layout_gravity="start">
-
                                 <ImageView
                                     android:id="@+id/imgmodule2"
                                     android:layout_width="123dp"
                                     android:layout_height="110dp"
                                     android:src="@drawable/ic_module_2" />
-
                                 <Button
                                     android:id="@+id/btnModule2"
                                     android:layout_width="wrap_content"
@@ -223,12 +212,10 @@
                                     android:layout_marginLeft="15dp"
                                     />
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="212dp"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -262,7 +249,6 @@
                                     android:textStyle="italic"
                                     />
                             </LinearLayout>
-
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </GridLayout>
@@ -276,7 +262,6 @@
                     android:layout_marginRight="25dp"
                     android:layout_below="@id/gridmodule2"
                     android:layout_marginTop="20dp">
-
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
@@ -287,7 +272,6 @@
                         android:layout_margin="12dp"
                         app:cardPreventCornerOverlap="false"
                         app:cardElevation="12dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -298,7 +282,6 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:layout_gravity="start">
-
                                 <ImageView
                                     android:id="@+id/imgmodule3"
                                     android:layout_width="123dp"
@@ -314,12 +297,10 @@
                                     android:layout_marginLeft="15dp"
                                     />
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="212dp"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -336,7 +317,6 @@
                                     android:gravity="center"
                                     android:textColor="#077CB3"
                                     android:text="'Xử lý văn bản cơ bản.'"/>
-
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
@@ -353,7 +333,6 @@
                                     android:textStyle="italic"
                                     />
                             </LinearLayout>
-
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </GridLayout>
@@ -367,7 +346,6 @@
                     android:layout_marginRight="25dp"
                     android:layout_below="@id/gridmodule3"
                     android:layout_marginTop="20dp">
-
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
@@ -378,7 +356,6 @@
                         android:layout_margin="12dp"
                         app:cardPreventCornerOverlap="false"
                         app:cardElevation="12dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -405,12 +382,10 @@
                                     android:layout_marginLeft="15dp"
                                     />
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="212dp"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -427,7 +402,6 @@
                                     android:gravity="center"
                                     android:textColor="#0BEC15"
                                     android:text="'Sử dụng bảng tính cơ bản.'"/>
-
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
@@ -444,7 +418,6 @@
                                     android:textStyle="italic"
                                     />
                             </LinearLayout>
-
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </GridLayout>
@@ -458,7 +431,6 @@
                     android:layout_marginRight="25dp"
                     android:layout_below="@id/gridmodule4"
                     android:layout_marginTop="20dp">
-
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
@@ -469,7 +441,6 @@
                         android:layout_margin="12dp"
                         app:cardPreventCornerOverlap="false"
                         app:cardElevation="12dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -480,13 +451,11 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:layout_gravity="start">
-
                                 <ImageView
                                     android:id="@+id/imgmodule5"
                                     android:layout_width="123dp"
                                     android:layout_height="110dp"
                                     android:src="@drawable/icon_module_5" />
-
                                 <Button
                                     android:id="@+id/btnModule5"
                                     android:layout_width="wrap_content"
@@ -496,12 +465,10 @@
                                     android:layout_marginLeft="15dp"
                                     />
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="212dp"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -518,7 +485,6 @@
                                     android:gravity="center"
                                     android:textColor="#DD5823"
                                     android:text="'Sử dụng trình chiếu cơ bản.'"/>
-
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
@@ -535,7 +501,6 @@
                                     android:textStyle="italic"
                                     />
                             </LinearLayout>
-
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </GridLayout>
@@ -549,7 +514,6 @@
                     android:layout_marginRight="25dp"
                     android:layout_below="@id/gridmodule5"
                     android:layout_marginTop="20dp">
-
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
@@ -560,7 +524,6 @@
                         android:layout_margin="12dp"
                         app:cardPreventCornerOverlap="false"
                         app:cardElevation="12dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -571,13 +534,11 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:layout_gravity="start">
-
                                 <ImageView
                                     android:id="@+id/imgmodule6"
                                     android:layout_width="123dp"
                                     android:layout_height="110dp"
                                     android:src="@drawable/icon_module_6" />
-
                                 <Button
                                     android:id="@+id/btnModule6"
                                     android:layout_width="wrap_content"
@@ -587,12 +548,10 @@
                                     android:layout_marginLeft="15dp"
                                     />
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="212dp"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -609,7 +568,6 @@
                                     android:gravity="center"
                                     android:textColor="#3D0A78"
                                     android:text="'Sử dụng Internet cơ bản.'"/>
-
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
@@ -626,13 +584,10 @@
                                     android:textStyle="italic"
                                     />
                             </LinearLayout>
-
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </GridLayout>
             </RelativeLayout>
-
-
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

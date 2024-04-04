@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -33,9 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-
-    private MaterialButton buttonQuizModule;
-    private ImageView buttonQuizModule1;
+    private Button btnModule1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,9 @@ public class HomeFragment extends Fragment {
 
         //buttonQuizModule1 = view.findViewById(R.id.buttonQuizModule1);
 
-        buttonQuizModule1.setOnClickListener(new View.OnClickListener() {
+        btnModule1 = view.findViewById(R.id.btnModule1);
+
+        btnModule1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(),"Success",Toast.LENGTH_LONG).show();
